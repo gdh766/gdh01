@@ -1,422 +1,127 @@
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>贪吃蛇小游戏</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Microsoft YaHei", Arial, sans-serif;
-      color: #f4f7fb;
-      background:
-        linear-gradient(rgba(8, 12, 18, 0.58), rgba(8, 12, 18, 0.72)),
-        url("outputs/海图_朋友圈高清氛围版_宽图.jpg") center / cover fixed;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    main {
-      width: min(960px, 100%);
-      display: grid;
-      grid-template-columns: minmax(300px, 560px) minmax(240px, 1fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .game-shell,
-    .side-panel {
-      background: rgba(13, 20, 28, 0.82);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(10px);
-      border-radius: 8px;
-    }
-
-    .game-shell {
-      padding: 16px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 24px;
-      letter-spacing: 0;
-    }
-
-    .status {
-      color: #aee8c7;
-      font-size: 14px;
-      min-height: 20px;
-      text-align: right;
-    }
-
-    canvas {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      display: block;
-      background: #0c1520;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 6px;
-    }
-
-    .side-panel {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .scores {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .score-box {
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-    }
-
-    .label {
-      display: block;
-      color: #9db1c6;
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
-
-    .value {
-      font-size: 28px;
-      font-weight: 700;
-    }
-
-    .controls {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 6px;
-      padding: 11px 12px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #071016;
-      background: #8be0b0;
-      cursor: pointer;
-    }
-
-    button.secondary {
-      background: #d7e0ea;
-    }
-
-    button:hover {
-      filter: brightness(1.08);
-    }
-
-    .pad {
-      display: grid;
-      grid-template-columns: repeat(3, 58px);
-      grid-template-rows: repeat(3, 48px);
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .pad button {
-      padding: 0;
-      font-size: 20px;
-      background: rgba(255, 255, 255, 0.14);
-      color: #f4f7fb;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .up { grid-column: 2; }
-    .left { grid-column: 1; grid-row: 2; }
-    .down { grid-column: 2; grid-row: 2; }
-    .right { grid-column: 3; grid-row: 2; }
-
-    .tips {
-      margin: 0;
-      color: #b9c8d8;
-      font-size: 14px;
-      line-height: 1.75;
-    }
-
-    @media (max-width: 760px) {
-      body {
-        padding: 14px;
-      }
-
-      main {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 21px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <section class="game-shell">
-      <div class="topbar">
-        <h1>贪吃蛇</h1>
-        <div class="status" id="status">按方向键开始</div>
-      </div>
-      <canvas id="board" width="600" height="600" aria-label="贪吃蛇游戏区域"></canvas>
-    </section>
-
-    <aside class="side-panel">
-      <div class="scores">
-        <div class="score-box">
-          <span class="label">当前分数</span>
-          <span class="value" id="score">0</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图书馆深层需求智能助手</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">L</div>
+          <div>
+            <h1>图书馆深层需求智能助手</h1>
+            <p>情境化空间与资源推荐原型</p>
+          </div>
         </div>
-        <div class="score-box">
-          <span class="label">最高分</span>
-          <span class="value" id="best">0</span>
+
+        <section class="panel">
+          <h2>用户画像</h2>
+          <div class="role-grid" id="roleGrid"></div>
+        </section>
+
+        <section class="panel">
+          <h2>当前情境</h2>
+          <label>
+            使用时段
+            <select id="timeSlot">
+              <option value="morning">清晨</option>
+              <option value="noon">午间</option>
+              <option value="evening">晚间</option>
+            </select>
+          </label>
+          <label>
+            学习目标
+            <select id="goal">
+              <option value="review">课程复习</option>
+              <option value="exam">考研备考</option>
+              <option value="paper">论文写作</option>
+              <option value="teaching">教学科研</option>
+              <option value="guide">新生探索</option>
+            </select>
+          </label>
+          <label>
+            安静偏好
+            <input id="quiet" type="range" min="1" max="5" value="4" />
+          </label>
+          <div class="check-list">
+            <label><input id="power" type="checkbox" checked /> 需要电源</label>
+            <label><input id="longStay" type="checkbox" /> 长时间学习</label>
+            <label><input id="english" type="checkbox" /> 需要英文资源</label>
+            <label><input id="facility" type="checkbox" /> 靠近热水/厕所</label>
+          </div>
+        </section>
+
+        <button class="primary-action" id="recommendBtn">生成推荐</button>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <h2 id="profileTitle">普通学生模式</h2>
+            <p id="profileInsight">关注复习效率、设施便利和馆藏定位。</p>
+          </div>
+          <div class="status-pill" id="privacyPill">最小化记录：仅使用偏好标签</div>
+        </header>
+
+        <section class="summary-band">
+          <div>
+            <span>推荐策略</span>
+            <strong>情境感知 + 内容匹配 + 多样性修正</strong>
+          </div>
+          <div>
+            <span>空间策略</span>
+            <strong>混合模式</strong>
+          </div>
+          <div>
+            <span>审计重点</span>
+            <strong>热门偏见、外文资源、冷门专业</strong>
+          </div>
+        </section>
+
+        <div class="content-grid">
+          <section class="result-section">
+            <div class="section-heading">
+              <h2>空间推荐</h2>
+              <span id="spaceCount"></span>
+            </div>
+            <div id="spaceResults" class="card-list"></div>
+          </section>
+
+          <section class="result-section">
+            <div class="section-heading">
+              <h2>资源推荐</h2>
+              <span id="resourceCount"></span>
+            </div>
+            <div id="resourceResults" class="card-list"></div>
+          </section>
         </div>
-      </div>
 
-      <div class="controls">
-        <button id="startBtn">开始</button>
-        <button class="secondary" id="pauseBtn">暂停</button>
-        <button class="secondary" id="restartBtn">重开</button>
-        <button class="secondary" id="speedBtn">普通速度</button>
-      </div>
+        <section class="audit-section">
+          <div class="section-heading">
+            <h2>推荐公平性审计</h2>
+            <span id="auditStatus">已启用多样性约束</span>
+          </div>
+          <div class="audit-grid" id="auditGrid"></div>
+        </section>
 
-      <div class="pad" aria-label="手机方向控制">
-        <button class="up" data-dir="up">↑</button>
-        <button class="left" data-dir="left">←</button>
-        <button class="down" data-dir="down">↓</button>
-        <button class="right" data-dir="right">→</button>
-      </div>
-
-      <p class="tips">键盘方向键或 WASD 控制移动。空格暂停，吃到绿色食物加分，撞墙或撞到自己游戏结束。</p>
-    </aside>
-  </main>
-
-  <script>
-    const canvas = document.getElementById("board");
-    const ctx = canvas.getContext("2d");
-    const scoreEl = document.getElementById("score");
-    const bestEl = document.getElementById("best");
-    const statusEl = document.getElementById("status");
-    const startBtn = document.getElementById("startBtn");
-    const pauseBtn = document.getElementById("pauseBtn");
-    const restartBtn = document.getElementById("restartBtn");
-    const speedBtn = document.getElementById("speedBtn");
-
-    const cells = 24;
-    const size = canvas.width / cells;
-    const speeds = [
-      { name: "慢速", ms: 155 },
-      { name: "普通速度", ms: 115 },
-      { name: "快速", ms: 82 }
-    ];
-
-    let speedIndex = 1;
-    let timer = null;
-    let running = false;
-    let paused = false;
-    let score = 0;
-    let best = Number(localStorage.getItem("snakeBest") || 0);
-    let snake;
-    let food;
-    let direction;
-    let nextDirection;
-
-    bestEl.textContent = best;
-
-    function reset() {
-      snake = [
-        { x: 11, y: 12 },
-        { x: 10, y: 12 },
-        { x: 9, y: 12 }
-      ];
-      direction = { x: 1, y: 0 };
-      nextDirection = { x: 1, y: 0 };
-      score = 0;
-      running = false;
-      paused = false;
-      scoreEl.textContent = score;
-      statusEl.textContent = "按方向键开始";
-      placeFood();
-      draw();
-    }
-
-    function start() {
-      if (running && !paused) return;
-      running = true;
-      paused = false;
-      statusEl.textContent = "游戏中";
-      clearInterval(timer);
-      timer = setInterval(tick, speeds[speedIndex].ms);
-    }
-
-    function pause() {
-      if (!running) return;
-      paused = !paused;
-      statusEl.textContent = paused ? "已暂停" : "游戏中";
-    }
-
-    function restart() {
-      clearInterval(timer);
-      reset();
-      start();
-    }
-
-    function placeFood() {
-      do {
-        food = {
-          x: Math.floor(Math.random() * cells),
-          y: Math.floor(Math.random() * cells)
-        };
-      } while (snake.some(part => part.x === food.x && part.y === food.y));
-    }
-
-    function tick() {
-      if (paused) return;
-      direction = nextDirection;
-      const head = snake[0];
-      const next = { x: head.x + direction.x, y: head.y + direction.y };
-
-      const hitWall = next.x < 0 || next.x >= cells || next.y < 0 || next.y >= cells;
-      const hitSelf = snake.some(part => part.x === next.x && part.y === next.y);
-      if (hitWall || hitSelf) {
-        gameOver();
-        return;
-      }
-
-      snake.unshift(next);
-      if (next.x === food.x && next.y === food.y) {
-        score += 10;
-        scoreEl.textContent = score;
-        if (score > best) {
-          best = score;
-          bestEl.textContent = best;
-          localStorage.setItem("snakeBest", String(best));
-        }
-        placeFood();
-      } else {
-        snake.pop();
-      }
-
-      draw();
-    }
-
-    function gameOver() {
-      clearInterval(timer);
-      running = false;
-      paused = false;
-      statusEl.textContent = "游戏结束，按重开";
-      draw();
-      ctx.fillStyle = "rgba(0, 0, 0, 0.48)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "700 44px Microsoft YaHei, Arial";
-      ctx.textAlign = "center";
-      ctx.fillText("游戏结束", canvas.width / 2, canvas.height / 2 - 10);
-      ctx.font = "22px Microsoft YaHei, Arial";
-      ctx.fillText(`得分 ${score}`, canvas.width / 2, canvas.height / 2 + 34);
-    }
-
-    function setDirection(name) {
-      const map = {
-        up: { x: 0, y: -1 },
-        down: { x: 0, y: 1 },
-        left: { x: -1, y: 0 },
-        right: { x: 1, y: 0 }
-      };
-      const selected = map[name];
-      if (!selected) return;
-      if (selected.x + direction.x === 0 && selected.y + direction.y === 0) return;
-      nextDirection = selected;
-      start();
-    }
-
-    function draw() {
-      ctx.fillStyle = "#0b1621";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.045)";
-      ctx.lineWidth = 1;
-      for (let i = 0; i <= cells; i++) {
-        const p = i * size;
-        ctx.beginPath();
-        ctx.moveTo(p, 0);
-        ctx.lineTo(p, canvas.height);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, p);
-        ctx.lineTo(canvas.width, p);
-        ctx.stroke();
-      }
-
-      ctx.fillStyle = "#84e1a7";
-      roundedCell(food.x, food.y, 7);
-
-      snake.forEach((part, index) => {
-        ctx.fillStyle = index === 0 ? "#f1f7ff" : "#38bdf8";
-        roundedCell(part.x, part.y, 6);
-      });
-    }
-
-    function roundedCell(x, y, radius) {
-      const gap = 2;
-      const px = x * size + gap;
-      const py = y * size + gap;
-      const w = size - gap * 2;
-      const h = size - gap * 2;
-      ctx.beginPath();
-      ctx.roundRect(px, py, w, h, radius);
-      ctx.fill();
-    }
-
-    document.addEventListener("keydown", event => {
-      const key = event.key.toLowerCase();
-      if (key === "arrowup" || key === "w") setDirection("up");
-      if (key === "arrowdown" || key === "s") setDirection("down");
-      if (key === "arrowleft" || key === "a") setDirection("left");
-      if (key === "arrowright" || key === "d") setDirection("right");
-      if (key === " ") pause();
-    });
-
-    document.querySelectorAll("[data-dir]").forEach(button => {
-      button.addEventListener("click", () => setDirection(button.dataset.dir));
-    });
-
-    startBtn.addEventListener("click", start);
-    pauseBtn.addEventListener("click", pause);
-    restartBtn.addEventListener("click", restart);
-    speedBtn.addEventListener("click", () => {
-      speedIndex = (speedIndex + 1) % speeds.length;
-      speedBtn.textContent = speeds[speedIndex].name;
-      if (running) {
-        clearInterval(timer);
-        timer = setInterval(tick, speeds[speedIndex].ms);
-      }
-    });
-
-    reset();
-  </script>
-</body>
+        <section class="feedback-section">
+          <div class="section-heading">
+            <h2>试用反馈记录</h2>
+            <span>用于第11章真实用户反馈</span>
+          </div>
+          <form id="feedbackForm" class="feedback-form">
+            <input id="feedbackUser" placeholder="用户类型，如考研学生" />
+            <input id="feedbackPositive" placeholder="正面反馈" />
+            <input id="feedbackNegative" placeholder="负面反馈/改进建议" />
+            <button type="submit">记录</button>
+          </form>
+          <div id="feedbackList" class="feedback-list"></div>
+        </section>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
 </html>
