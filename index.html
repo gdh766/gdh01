@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图书馆深层需求智能助手</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">L</div>
+          <div>
+            <h1>图书馆深层需求智能助手</h1>
+            <p>情境化空间与资源推荐原型</p>
+          </div>
+        </div>
+
+        <section class="panel">
+          <h2>用户画像</h2>
+          <div class="role-grid" id="roleGrid"></div>
+        </section>
+
+        <section class="panel">
+          <h2>当前情境</h2>
+          <label>
+            使用时段
+            <select id="timeSlot">
+              <option value="morning">清晨</option>
+              <option value="noon">午间</option>
+              <option value="evening">晚间</option>
+            </select>
+          </label>
+          <label>
+            学习目标
+            <select id="goal">
+              <option value="review">课程复习</option>
+              <option value="exam">考研备考</option>
+              <option value="paper">论文写作</option>
+              <option value="teaching">教学科研</option>
+              <option value="guide">新生探索</option>
+            </select>
+          </label>
+          <label>
+            安静偏好
+            <input id="quiet" type="range" min="1" max="5" value="4" />
+          </label>
+          <div class="check-list">
+            <label><input id="power" type="checkbox" checked /> 需要电源</label>
+            <label><input id="longStay" type="checkbox" /> 长时间学习</label>
+            <label><input id="english" type="checkbox" /> 需要英文资源</label>
+            <label><input id="facility" type="checkbox" /> 靠近热水/厕所</label>
+          </div>
+        </section>
+
+        <button class="primary-action" id="recommendBtn">生成推荐</button>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <h2 id="profileTitle">普通学生模式</h2>
+            <p id="profileInsight">关注复习效率、设施便利和馆藏定位。</p>
+          </div>
+          <div class="status-pill" id="privacyPill">最小化记录：仅使用偏好标签</div>
+        </header>
+
+        <section class="summary-band">
+          <div>
+            <span>推荐策略</span>
+            <strong>情境感知 + 内容匹配 + 多样性修正</strong>
+          </div>
+          <div>
+            <span>空间策略</span>
+            <strong>混合模式</strong>
+          </div>
+          <div>
+            <span>审计重点</span>
+            <strong>热门偏见、外文资源、冷门专业</strong>
+          </div>
+        </section>
+
+        <div class="content-grid">
+          <section class="result-section">
+            <div class="section-heading">
+              <h2>空间推荐</h2>
+              <span id="spaceCount"></span>
+            </div>
+            <div id="spaceResults" class="card-list"></div>
+          </section>
+
+          <section class="result-section">
+            <div class="section-heading">
+              <h2>资源推荐</h2>
+              <span id="resourceCount"></span>
+            </div>
+            <div id="resourceResults" class="card-list"></div>
+          </section>
+        </div>
+
+        <section class="audit-section">
+          <div class="section-heading">
+            <h2>推荐公平性审计</h2>
+            <span id="auditStatus">已启用多样性约束</span>
+          </div>
+          <div class="audit-grid" id="auditGrid"></div>
+        </section>
+
+        <section class="feedback-section">
+          <div class="section-heading">
+            <h2>试用反馈记录</h2>
+            <span>用于第11章真实用户反馈</span>
+          </div>
+          <form id="feedbackForm" class="feedback-form">
+            <input id="feedbackUser" placeholder="用户类型，如考研学生" />
+            <input id="feedbackPositive" placeholder="正面反馈" />
+            <input id="feedbackNegative" placeholder="负面反馈/改进建议" />
+            <button type="submit">记录</button>
+          </form>
+          <div id="feedbackList" class="feedback-list"></div>
+        </section>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
